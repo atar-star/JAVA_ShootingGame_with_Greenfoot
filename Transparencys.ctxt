@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=
+comment0.target=void\ Transparence()
+comment1.params=
+comment1.target=void\ AnTransparence()
+comment2.params=order
+comment2.target=void\ OrderTransparence(int)
+numComments=3

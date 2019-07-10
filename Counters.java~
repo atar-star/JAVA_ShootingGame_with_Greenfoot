@@ -1,0 +1,19 @@
+import greenfoot.*;
+
+public class Counters extends Transparencys{
+
+    public void Transparence(){
+        getImage().setTransparency(0);
+        setImage(t);
+    } 
+
+    public void AnTransparence(){
+        getImage().setTransparency(255);
+        setImage(t);
+    } 
+
+    public void OrderTransparence(int order){
+        getImage().setTransparency(order);
+        setImage(t);
+    }   
+}

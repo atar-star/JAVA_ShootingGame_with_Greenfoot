@@ -1,0 +1,182 @@
+import greenfoot.*;
+
+public class Stage2 extends Maps{
+
+    private static final GreenfootImage bgImage = new GreenfootImage("World/world2-1.jpg");
+    GreenfootImage background = new GreenfootImage(540, 570);
+    private int scrollSpeed = -1;
+    private GreenfootImage scrollingImage;
+    private int scrollPosition = 630;
+    GreenfootImage image = new GreenfootImage(540, 570);
+    GreenfootImage bg;
+    Text txt;
+    public int encount = 0;
+    public int count = 0;
+    public int endes = 0;
+    public int bossflag = -1;
+    public int enfig = 0;
+    private double trans = 0;
+    public Stage2(){
+        InitImage(570);
+        getImage().setTransparency(0);
+    }
+
+    public void act(){
+        painting();
+        if(bossflag==-1){
+            trans+=10;
+            if(trans>255){
+                trans=255;
+            }
+            (((World1)getWorld()).getMychr()).OrderTransparence((int)Math.ceil(trans));
+            getImage().setTransparency((int)Math.ceil(trans));
+            if(trans==255){
+                bossflag++;
+            }
+        }else if(bossflag == 0){
+            if(encount > 50){
+                getWorld().addObject(new Stagetitle("STAGE2.png", 3, this),getWorld().getWidth()/2,getWorld().getHeight()/2);
+                encount = -1000;
+            }else{
+                encount++;
+            }
+        }else if(bossflag == 1 && endes < 35){
+            if(enfig < 6){
+                if (encount > 60){
+                    if(Greenfoot.getRandomNumber(11) >= 3){
+                        for(int i=0; i<Greenfoot.getRandomNumber(3) + 0; i++){
+                            getWorld().addObject(new Enemy1(-1,-1, 3, 360, 4, this), Greenfoot.getRandomNumber(460) + 85, 15);
+                            enfig ++;
+                            if(enfig > 6){
+                                break;
+                            }
+                        }
+                    }else{
+                        getWorld().addObject(new Enemy2(this), Greenfoot.getRandomNumber(460) + 85, 5);
+                        enfig ++;
+                    }
+                    encount = 0;
+                }else{
+                    encount ++;
+                }
+            }
+        }else if(bossflag == 1 && endes >= 35){
+            if(enfig != 0){
+            }else if(count > 50){
+                getWorld().addObject(new Boss1(this), getWorld().getWidth()/2, 0);
+                bossflag++;
+                count = 0;
+            }else{
+                count ++;
+            }
+        }else if(bossflag == 2){
+        }else if(bossflag == 3 && endes <= 80){
+            if(enfig < 6){
+                if (encount > 53){
+                    if(Greenfoot.getRandomNumber(11) >= 3){
+                        for(int i=0; i<Greenfoot.getRandomNumber(3) + 1; i++){
+                            getWorld().addObject(new Enemy1(-1,-1, 3, 360, 4, this), Greenfoot.getRandomNumber(460) + 85, 15);
+                            enfig ++;
+                            if(enfig > 7){
+                                break;
+                            }
+                        }
+                    }else{
+                        getWorld().addObject(new Enemy2(this), Greenfoot.getRandomNumber(460) + 85, 15);
+                        enfig ++;
+                    }
+                    encount = 0;
+                }else{
+                    encount ++;
+                }
+            }
+        }else if(bossflag == 3 && endes > 80){ 
+            if(enfig != 0){
+            }else if(count > 120){
+                bossflag++;
+                count = 0;
+            }else{
+                count ++;
+            }
+        }else if(bossflag == 4){ 
+            if(count > 50){
+                getWorld().addObject(new Boss2(this), getWorld().getWidth()/2, 30);
+                bossflag++;
+                count = 0;
+            }else{
+                count ++;
+            }
+        }else if(bossflag == 5){
+        }else if(bossflag == 6){
+            Clear();
+        }else if(bossflag == 7){
+            if(encount>=90){
+                bossflag++;
+            }else{encount++;}
+        }else if(bossflag==8){
+            trans-=10;
+            if(trans>0){
+                trans=0;
+            }
+            (((World1)getWorld()).getMychr()).OrderTransparence((int)Math.ceil(trans));
+            getImage().setTransparency((int)Math.ceil(trans));
+            if(trans==0){
+                bossflag++;
+            }
+        }else{
+        }
+    }    
+
+    public void InitImage(int scroll){
+        scrollingImage = getScrollingImage(bgImage.getWidth(), bgImage.getHeight());
+        background.drawImage(scrollingImage, 0, scroll);  
+        setImage(background);
+    }
+
+    private void paint(int position){
+        bg = getImage();
+        bg.drawImage(scrollingImage, 0, position);
+        bg.drawImage(scrollingImage, 0, position - scrollingImage.getHeight());
+    }
+
+    private GreenfootImage getScrollingImage(int width, int height){
+        image.scale(width,height);
+        for(int x = 0; x < width; x += bgImage.getWidth()) {
+            for(int y = 0; y < height; y += bgImage.getHeight()){
+                image.drawImage(bgImage, x, y);
+            }
+        }
+        return image;
+    }
+
+    public void painting(){
+        if(scrollPosition >= bgImage.getHeight()){
+            scrollPosition = 0;
+        }
+        scrollPosition -= scrollSpeed;
+        bg = getImage();
+        bg.drawImage(scrollingImage, 0, scrollPosition);
+        bg.drawImage(scrollingImage, 0, scrollPosition - scrollingImage.getHeight());
+    }
+
+    public void bossDestroy(){   
+        bossflag ++;
+        encount = 0;
+        enfig = 0;
+    }
+
+    public void enDestroy(boolean esflag){
+        if(esflag){
+            endes ++;
+        }
+        enfig --;
+    }
+
+    public void Clear(){
+        Greenfoot.setSpeed(50);
+        txt = new Text("STAGE2 CLEAR!",getWorld(), false);
+        getWorld().addObject(txt, getWorld().getWidth()/2, getWorld().getHeight()/2);
+        getWorld().removeObjects(getWorld().getObjects(Can.class));
+        bossflag++;
+    }
+}

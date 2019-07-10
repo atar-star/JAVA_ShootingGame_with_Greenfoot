@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.params=wo
+comment0.target=Stage2x2(World1)
+comment1.params=
+comment1.target=void\ act()
+comment2.params=
+comment2.target=void\ HugeBeams()
+comment3.params=scroll
+comment3.target=void\ InitImage(int)
+comment4.params=width\ height
+comment4.target=greenfoot.GreenfootImage\ getScrollingImage(int,\ int)
+comment5.params=
+comment5.target=void\ painting()
+comment6.params=
+comment6.target=void\ bossDestroy()
+comment7.params=esflag
+comment7.target=void\ enDestroy(boolean)
+comment8.params=
+comment8.target=void\ Clear()
+comment9.params=pau
+comment9.target=void\ Pausing(boolean)
+numComments=10
