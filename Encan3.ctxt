@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=scx\ scy\ damage\ flco
+comment0.target=Encan3(int,\ int,\ double,\ int)
+comment1.params=
+comment1.target=void\ act()
+comment2.params=pau
+comment2.target=void\ Pausing(boolean)
+numComments=3

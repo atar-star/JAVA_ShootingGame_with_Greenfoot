@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=change\ scx\ scy\ damage
+comment0.target=Can(int,\ int,\ int,\ double)
+comment1.params=
+comment1.target=void\ act()
+comment2.params=des
+comment2.target=void\ hittest(boolean)
+comment3.params=sc
+comment3.target=void\ hitEnemy(int)
+comment4.params=
+comment4.target=void\ Reflecter()
+comment5.params=pau
+comment5.target=void\ Pausing(boolean)
+numComments=6

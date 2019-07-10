@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.params=bos\ bossx\ opmx
+comment0.target=Boss2x1Option(Bosss,\ int,\ int)
+comment1.params=
+comment1.target=void\ act()
+comment2.params=dam
+comment2.target=void\ Damage(double)
+comment3.params=
+comment3.target=void\ updateImage()
+comment4.params=pau
+comment4.target=void\ Pausing(boolean)
+numComments=5

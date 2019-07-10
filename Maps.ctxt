@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.params=
+comment0.target=void\ bossDestroy()
+comment1.params=esflag
+comment1.target=void\ enDestroy(boolean)
+numComments=2

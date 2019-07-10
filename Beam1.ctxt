@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=ax\ ay\ sh\ damage
+comment0.target=Beam1(int,\ int,\ boolean,\ double)
+comment1.params=
+comment1.target=void\ act()
+comment2.params=pau
+comment2.target=void\ Pausing(boolean)
+numComments=3

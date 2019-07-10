@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=ax\ ay
+comment0.target=Hugebeam(int,\ int)
+comment1.params=
+comment1.target=void\ act()
+comment2.params=pau
+comment2.target=void\ Pausing(boolean)
+numComments=3
