@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.params=st
+comment0.target=Ene1(boolean)
+comment1.params=
+comment1.target=void\ act()
+comment2.params=
+comment2.target=void\ move()
+comment3.params=
+comment3.target=void\ shot()
+comment4.params=dam
+comment4.target=void\ Damage(double)
+comment5.params=hp\ m\ inx\ iny\ mo\ sh\ move\ carve\ caag
+comment5.target=void\ inmap(double,\ Maps,\ int,\ int,\ int,\ int,\ double,\ double,\ double)
+comment6.params=
+comment6.target=void\ store()
+comment7.params=
+comment7.target=boolean\ getStoring()
+comment8.params=canx\ cany\ deg
+comment8.target=void\ inEncan(int,\ int,\ int)
+comment9.params=
+comment9.target=double\ getDamage()
+numComments=10

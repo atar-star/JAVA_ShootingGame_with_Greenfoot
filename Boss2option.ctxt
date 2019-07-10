@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=bos\ bossx\ opmx\ typ
+comment0.target=Boss2option(Boss,\ int,\ int,\ int)
+comment1.params=
+comment1.target=void\ act()
+comment2.params=dam
+comment2.target=void\ Damage(double)
+comment3.params=pau
+comment3.target=void\ Pausing(boolean)
+comment4.params=
+comment4.target=void\ shot()
+comment5.params=canx\ cany\ deg\ speed
+comment5.target=void\ inEncan(int,\ int,\ int,\ int)
+numComments=6

@@ -1,0 +1,24 @@
+#BlueJ class context
+comment0.params=st
+comment0.target=Can(boolean)
+comment1.params=
+comment1.target=void\ act()
+comment10.params=pau
+comment10.target=void\ Pausing(boolean)
+comment2.params=
+comment2.target=void\ shtype()
+comment3.params=
+comment3.target=void\ Reflecter()
+comment4.params=bom
+comment4.target=void\ hittest(boolean)
+comment5.params=canx\ cany\ deg\ damage\ six\ siy\ type
+comment5.target=void\ inCan(int,\ int,\ int,\ double,\ int,\ int,\ int)
+comment6.params=A
+comment6.target=boolean\ touch(greenfoot.Actor)
+comment7.params=inx\ iny\ damage\ six\ siy\ shty
+comment7.target=void\ inmap(int,\ int,\ double,\ int,\ int,\ int)
+comment8.params=
+comment8.target=void\ store()
+comment9.params=
+comment9.target=boolean\ getStoring()
+numComments=11

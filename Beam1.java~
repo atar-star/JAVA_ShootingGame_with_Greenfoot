@@ -1,0 +1,80 @@
+import greenfoot.*;
+
+public class Beam1 extends Beams{
+    boolean pause = true,storing;
+    GreenfootImage image,Ai,i,i2;
+    int count=0,w,h,speed,myx,myy,Aw,Ah,tocx,tocy;
+    double dam;
+    Actor mychr;
+    public Beam1(boolean st){
+        storing = st;
+        setImage("Cannon/beam2.png");
+        getImage().setTransparency(0);
+    }
+
+    public void act(){
+        if(pause&&!storing){
+            move(speed);
+            if(getX() > 585 || getX() < 5 || getY() > 605 || getY() < 5){
+                store();
+            }else{
+                mychr = getOneIntersectingObject(Mychr.class);
+                if(mychr != null){
+                    if(touch(mychr)){
+                        ((Mychr)mychr).Damage(dam,false);
+                        store();
+                    }
+                }
+            }
+        }
+    }  
+
+    public boolean touch(Actor A){    
+        Ai=A.getImage(); 
+        myx=getX();
+        myy=getY();
+        tocx = A.getX();
+        tocy = A.getY();
+        Aw = Ai.getWidth();
+        Ah = Ai.getHeight();
+        i2.clear();
+        i2.drawImage(Ai,tocx-myx-(Aw/2-w/2),tocy-myy-(Ah/2-h/2));
+        for(int yi = 0; yi<h; yi++)  
+            for(int xi = 0; xi<w; xi++)  
+                if(i2.getColorAt(xi,yi).getAlpha()>0 && i.getColorAt(xi,yi).getAlpha()>0)  
+                    return b=true;
+        return b=false;  
+    }
+
+    public void inmap(int inx, int iny, int six, int siy, int sped, double damage){
+        getImage().setTransparency(255);
+        storing = false;
+        dam=damage;
+        speed=sped;
+        setImage("Cannon/beam2.png");
+        getImage().scale(six,siy);
+        w=six;
+        h=siy;
+        i = getImage();
+        i2=new GreenfootImage(six,siy);
+        setLocation(inx, iny);
+    }
+
+    public void store(){
+        getImage().setTransparency(0);
+        Ai = null;
+        i = null;
+        i2 = null;
+        mychr = null;
+        setLocation(330,629);
+        storing = true;
+    }
+
+    public void Pausing(boolean pau){
+        pause = pau;
+    }
+
+    public boolean getStoring(){
+        return storing;
+    }
+}

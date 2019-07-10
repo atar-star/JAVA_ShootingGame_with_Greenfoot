@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=st
+comment0.target=Burst(boolean)
+comment1.params=
+comment1.target=void\ act()
+comment2.params=inx\ iny\ pox\ poy\ size\ anispeed
+comment2.target=void\ inmap(int,\ int,\ int,\ int,\ int,\ int)
+comment3.params=
+comment3.target=void\ store()
+comment4.params=pau
+comment4.target=void\ Pausing(boolean)
+comment5.params=
+comment5.target=boolean\ getStoring()
+numComments=6

@@ -1,0 +1,50 @@
+import greenfoot.*;
+
+public class Cure extends Transparencys{
+    boolean pause = true;
+    private int cure;
+    Mychr mychr;
+    public boolean storing;
+    
+    public Cure(boolean st){
+        storing = st;
+        getImage().scale(17,17);
+    }
+
+    public void act(){
+        if(!storing&&pause){
+            setLocation(getX(), getY() + 3);
+            mychr = (Mychr)getOneIntersectingObject(Mychr.class);
+            if(mychr != null || getY() > 605){
+                if(mychr != null){
+                    mychr.Damage(-cure,false);
+                    ((A)getWorld()).getCounter().bumpCount(20);
+                }
+                store();
+            }
+        }
+    }    
+    
+    public void Pausing(boolean pau){
+        pause = pau;
+    }
+    
+    public boolean getStoring(){
+        return storing;
+    }
+    
+    public void store(){
+        getImage().setTransparency(0);
+        setLocation(330,629);
+        //getImage().scale(40,40);
+        storing = true;
+    }
+    
+    public void inmap(int inx, int iny,int cu){
+        cure = cu;
+        getImage().setTransparency(255);
+        //getImage().scale(sizx,sizy);
+        storing = false;
+        setLocation(inx, iny);
+    }
+}

@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=st
+comment0.target=Cure(boolean)
+comment1.params=
+comment1.target=void\ act()
+comment2.params=pau
+comment2.target=void\ Pausing(boolean)
+comment3.params=
+comment3.target=boolean\ getStoring()
+comment4.params=
+comment4.target=void\ store()
+comment5.params=inx\ iny\ cu
+comment5.target=void\ inmap(int,\ int,\ int)
+numComments=6

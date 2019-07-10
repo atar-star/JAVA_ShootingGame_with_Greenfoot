@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.params=ma
+comment0.target=Boss3(Maps)
+comment1.params=
+comment1.target=void\ act()
+comment2.params=
+comment2.target=void\ shot()
+comment3.params=dam
+comment3.target=void\ Damage(double)
+comment4.params=
+comment4.target=void\ updateImage()
+comment5.params=pau
+comment5.target=void\ Pausing(boolean)
+comment6.params=deg\ six\ siy
+comment6.target=void\ inBeam(int,\ int,\ int)
+comment7.params=
+comment7.target=void\ Burst()
+numComments=8

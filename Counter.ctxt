@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.params=scores\ sizes
+comment0.target=Counter(int,\ int)
+comment1.params=amount
+comment1.target=void\ bumpCount(int)
+comment2.params=
+comment2.target=int\ returnScore()
+comment3.params=size2
+comment3.target=void\ setSize(int)
+numComments=4

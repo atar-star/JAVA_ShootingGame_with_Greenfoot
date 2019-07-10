@@ -1,0 +1,120 @@
+import greenfoot.*;
+import java.util.List;
+import java.awt.*;
+public class Ene2 extends Enemy{
+    boolean pause = true;
+    public boolean storing;
+    private int anime = 0,anicount = 1,a = -1,intime,shcount = 150,count = 0;
+    double HP,dam = 1;
+    Maps ma;
+    int sizx = 30,sizy = 30;
+    List encans,cures;
+    Encan1 inencan;
+    //Encan2 inencan;
+    Cure incure;
+    public Ene2(boolean st){
+        storing = st;
+        //getImage().scale(sizx,sizy);
+        getImage().setTransparency(0);
+        //getImage().scale(5,5);
+    }
+    
+    public void act(){
+        if(!storing&&pause){
+            if((anime%7) == 0){
+                setImage("Enemy/Ene2/ene2-" + anicount +".png");
+                //getImage().scale(sizx,sizy);
+                if(anicount == 7|anicount == 1){
+                    a *= -1;
+                }
+                anicount += a ;
+            }
+            anime ++;
+            
+            if(intime > count){
+                setLocation(getX(), getY() + 3);
+            }
+            count ++;
+
+            if(shcount > 200){
+                inEncan(getX(), getY());
+                shcount = 0;
+            }
+            shcount ++;
+
+            if(HP <= 0){
+                if(Greenfoot.getRandomNumber(11) <= 3){
+                    inCure(getX(),getY());
+                }
+                ((A)getWorld()).getCounter().bumpCount(30);
+                ma.enDestroy(true);
+                store();
+                //getWorld().removeObject(this);
+            }else if(getY() < 0){
+                ma.enDestroy(false); 
+                store();
+                //getWorld().removeObject(this);
+            }
+        }
+    }    
+
+    public void Damage(double dam){
+        HP -= dam;
+    }
+
+    public void inmap(double hp, Maps m, int shpat, int inx, int iny){
+        getImage().setTransparency(255);
+        intime = shpat;
+        ma = m;
+        HP = hp;
+        //getImage().scale(sizx,sizy);
+        storing = false;
+        setLocation(inx, iny);
+        anime = 0;
+        anicount = 1;
+        a = -1;
+        count=0;
+        shcount = 150;
+    }
+
+    public void store(){
+        getImage().setTransparency(0);
+        setLocation(1,629);
+        //getImage().scale(40,40);
+        storing = true;
+    }
+
+    public boolean getStoring(){
+        return storing;
+    }
+    
+    public void inEncan(int canx, int cany){
+        encans = getWorld().getObjects(Encan1.class);
+        for(int i=0;i<encans.size();i++){
+            inencan = (Encan1)(encans.get(i));
+            if(inencan.getStoring()){
+                inencan.inmap(canx,cany,1,2,5);
+                break;
+            }
+        }
+    }
+    
+    public void inCure(int canx, int cany){
+        cures = getWorld().getObjects(Cure.class);
+        for(int i=0;i<cures.size();i++){
+            incure = (Cure)(cures.get(i));
+            if(incure.getStoring()){
+                incure.inmap(canx,cany,1);
+                break;
+            }
+        }
+    }
+    
+    public double getDamage(){
+        return dam;
+    }
+    
+    public void Pausing(boolean pau){
+        pause = pau;
+    }
+}

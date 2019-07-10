@@ -1,0 +1,147 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.awt.*;
+import java.util.List;
+public class Boss1 extends Boss{
+    boolean pause = true;
+    private int movecount=0,movecount2=0,shcount=35,sh2count=0,rot=-70,rot2,burstx,bursty,brsize,myx,myy;
+    private boolean firstmove2=true,bossflag=true;
+    public double dam = 1,HP = 70;
+    Maps map;
+    public int trans=255,descount=0,moves;
+    List encan1s,cures,bursts;
+    Encan1 inencan1;
+    Cure incure;
+    Burst inburst;
+    public Boss1(Maps ma){
+        setImage("Boss/boss1-1.png");
+        map = ma;
+        if(Greenfoot.getRandomNumber(2)==1){
+            moves = 6;
+        }else{
+            moves = -6;
+        }
+    }
+
+    public void act(){
+        if(pause){
+            if(movecount < 1){
+                movecount ++;
+            }else  if(movecount < 40){
+                setLocation(getX(), getY() + 2);
+                movecount ++;
+            }
+            if(movecount >= 40){
+                if(HP>0){
+                    move();
+                    shot();
+                }else{
+                    if(trans>20){
+                        super.OrderTransparence(trans);
+                        trans-=3;
+                        if((descount%13)==0){
+                            burstx = Greenfoot.getRandomNumber(51)-25;
+                            bursty = Greenfoot.getRandomNumber(51)-25;
+                            brsize = Greenfoot.getRandomNumber(41)+40;
+                            Burst();
+                        }
+                        descount++;
+                    }else{
+                        inCure(getX(),getY());
+                        ((A)getWorld()).getCounter().bumpCount(500);
+                        map.bossDestroy();
+                        //(((A)getWorld()).getMychr()).setshtype(2);
+                        getWorld().removeObject(this);
+                    }
+                }
+            }
+        }
+    }
+
+    public void Damage(double dam){
+        HP -= dam;
+    }
+
+    private void updateImage(){  
+        GreenfootImage image = new GreenfootImage(120, 90);
+        image.setColor(Color.black);
+        image.setTransparency(50);
+        image.fill();
+        GreenfootImage txtImg = new GreenfootImage("a"+HP, 46, Color.white, new Color(0, 0, 0, 0)); 
+        image.drawImage(txtImg, (image.getWidth() - txtImg.getWidth())/2, (image.getHeight()-txtImg.getHeight())/2);  
+        setImage(image);
+    }
+
+    private void move(){
+        setLocation(getX() + moves, getY());
+        if(getX()>=550||getX()<=110){
+            moves*=-1;
+        }
+    }
+
+    private void shot(){
+        if((shcount%40)==0){
+            for(int i=0; i<6; i++){
+                inEncan(getX()+15,getY(),rot+i*50,1,6);
+            }
+            for(int i=0; i<6; i++){
+                rot2 = 180 - rot;
+                inEncan(getX()-15,getY(),rot2-i*50,1,6);
+            }
+            sh2count ++;
+            if(sh2count <= 6){
+                rot += 20;
+            }else if(sh2count == 12){
+                sh2count = 0;
+            }else{
+                rot -= 20;
+            }
+        }
+        if((shcount%60)==0){
+            myx=getX();
+            myy=getY();
+            inEncan(myx+30,myy-15,90,2,5);
+            inEncan(myx-30,myy-15,90,2,5);
+        }
+        shcount ++;
+    }
+
+    public void Pausing(boolean pau){
+        pause = pau;
+    }
+
+    public void inEncan(int canx, int cany, int deg, int type, int speed){
+        encan1s = getWorld().getObjects(Encan1.class);
+        for(int i=0;i<encan1s.size();i++){
+            inencan1 = (Encan1)(encan1s.get(i));
+            if(inencan1.getStoring()){
+                inencan1.inmap(canx,cany,1,type,speed);
+                inencan1.setRotation(deg);
+                break;
+            }
+        }
+    }
+
+    public void inCure(int canx, int cany){
+        cures = getWorld().getObjects(Cure.class);
+        for(int i=0;i<cures.size();i++){
+            incure = (Cure)(cures.get(i));
+            if(incure.getStoring()){
+                incure.inmap(canx,cany,3);
+                break;
+            }
+        }
+    }
+    
+    public void Burst(){
+        bursts = getWorld().getObjects(Burst.class);
+        for(int i=0;i<bursts.size();i++){
+            inburst = (Burst)(bursts.get(i));
+            if(inburst.getStoring()){
+                inburst.inmap(getX()+burstx,getY()+bursty,burstx,bursty,brsize,Greenfoot.getRandomNumber(3)+1);
+                break;
+            }
+        }
+    }
+}
+
+   
