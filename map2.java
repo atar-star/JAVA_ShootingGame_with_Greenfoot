@@ -1,0 +1,190 @@
+import greenfoot.*;
+import java.util.List;
+public class map2 extends Stage2{
+    boolean pause = true;
+    private static final GreenfootImage bgImage = new GreenfootImage("World/world2.jpg");
+    GreenfootImage background = new GreenfootImage(540, 570);
+    private int scrollSpeed = -1;
+    private GreenfootImage scrollingImage;
+    private int scrollPosition = 630;
+    GreenfootImage image = new GreenfootImage(540, 570);
+    public int encount=60,count=0,endes=0,bossflag=0,enfig=0;
+    private double trans = 0;
+    Text txt;
+    List cans,ene2s,ene3s;
+    Ene2 inene2;
+    Ene3 inene3;
+    public map2(){
+        InitImage(570);       
+        getImage().setTransparency(0);
+    }
+
+    public void act(){
+        if(pause){
+            painting();
+            if(bossflag==0){
+                (((A)getWorld()).getMychr()).mapmoving(true);
+                //(((A)getWorld()).getMychr()).mapmoving(true);
+                trans+=10;
+                if(trans>255){
+                    trans=255;
+                }
+                (((A)getWorld()).getMychr()).OrderTransparence((int)Math.ceil(trans));
+                cans = getWorld().getObjects(Can.class);
+                for(int i = 0;i < cans.size();i++){
+                    if(!((Can)cans.get(i)).getStoring())((Can)cans.get(i)).OrderTransparence((int)Math.ceil(trans));
+                }
+                getImage().setTransparency((int)Math.ceil(trans));
+                if(trans==255){
+                    bossflag++;
+                }
+            }else if(bossflag==1){
+                if(encount > 50){
+                    getWorld().addObject(new Stagetitle("StageTitle/STAGE2.png", 3, this),getWorld().getWidth()/2,getWorld().getHeight()/2);
+                    encount = -1000;
+                }else{
+                    encount++;
+                }
+            }else if(bossflag==2){
+                if(enfig < 3){
+                    if (encount > 90){
+                        if(Greenfoot.getRandomNumber(11) >= 2){
+                            inEnemy3(180-Greenfoot.getRandomNumber(181));
+                            enfig ++;
+                        }
+                        encount = 0;
+                    }else{
+                        encount ++;
+                    }
+                }
+                if(getWorld().getObjects(map.class).isEmpty()){
+                    bossflag++;
+                }
+            }else if(bossflag==3){
+                if(enfig != 0){
+                }else if(count > 50){
+                    getWorld().addObject(new Boss2(this), getWorld().getWidth()/2, 20);
+                    bossflag++;
+                    count = 0;
+                }else{
+                    count ++;
+                }
+            }else if(bossflag==4){
+            }else if(bossflag==5){
+                if(encount>=120){
+                    bossflag++;
+                    encount=0;
+                }else{encount++;}
+            }else if(bossflag==6){
+                Clear();
+            }else if(bossflag==7){
+                if(encount>=200){
+                    (((A)getWorld()).getMychr()).mapmoving(false);
+                    bossflag++;
+                }else{encount++;}
+            }else if(bossflag==8){
+                trans-=6;
+                if(trans<0){
+                    trans=0;
+                }
+                cans = getWorld().getObjects(Can.class);
+                for(int i = 0;i < cans.size();i++){
+                    if(!((Can)cans.get(i)).getStoring())((Can)cans.get(i)).OrderTransparence((int)Math.ceil(trans));
+                }
+                (((A)getWorld()).getMychr()).OrderTransparence((int)Math.ceil(trans));
+                txt.OrderTransparence((int)Math.ceil(trans));
+                getImage().setTransparency((int)Math.ceil(trans));
+                if(trans==0){
+                    bossflag++;
+                }
+            }else if(bossflag==9){
+                getWorld().removeObject(txt);
+                Greenfoot.delay(60);
+                (((A)getWorld()).getMychr()).setLocation(getWorld().getWidth()/2,500);
+                ((A)getWorld()).allflag();
+                getImage().clear();
+                getWorld().removeObject(this);
+            }
+        }
+    }    
+
+    public void InitImage(int scroll){
+        scrollingImage = getScrollingImage(bgImage.getWidth(), bgImage.getHeight());
+        background.drawImage(scrollingImage, 0, scroll);  
+        setImage(background);
+    }
+
+    private void paint(int position){
+        background = getImage();
+        background.drawImage(scrollingImage, 0, position);
+        background.drawImage(scrollingImage, 0, position - scrollingImage.getHeight());
+    }
+
+    private GreenfootImage getScrollingImage(int width, int height){
+        image.scale(width,height);
+        for(int x = 0; x < width; x += bgImage.getWidth()) {
+            for(int y = 0; y < height; y += bgImage.getHeight()){
+                image.drawImage(bgImage, x, y);
+            }
+        }
+        return image;
+    }
+
+    public void painting(){
+        if(scrollPosition >= bgImage.getHeight()){
+            scrollPosition = 0;
+        }
+        scrollPosition -= scrollSpeed;
+        background = getImage();
+        background.clear();
+        background.drawImage(scrollingImage, 0, scrollPosition);
+        background.drawImage(scrollingImage, 0, scrollPosition - scrollingImage.getHeight());
+    }
+    
+    public void bossDestroy(){   
+        bossflag ++;
+        encount = 0;
+        enfig = 0;
+    }
+
+    public void enDestroy(boolean esflag){
+        if(esflag){
+            endes ++;
+        }
+        enfig --;
+    }
+    
+    public void Clear(){
+        Greenfoot.setSpeed(50);
+        txt = new Text("STAGE2 CLEAR!",false);
+        getWorld().addObject(txt, getWorld().getWidth()/2, getWorld().getHeight()/2);
+        //getWorld().removeObjects(getWorld().getObjects(Can.class));
+        bossflag++;
+    }
+
+    public void inEnemy2(){
+        ene2s = getWorld().getObjects(Ene2.class);
+        for(int i=0;i<ene2s.size();i++){
+            inene2 = (Ene2)ene2s.get(i);
+            if(inene2.getStoring()){
+                inene2.inmap(2.1, this, Greenfoot.getRandomNumber(7) * 10 + 40, Greenfoot.getRandomNumber(460) + 85, 25);
+                break;
+            }
+        }
+    }
+    
+    public void inEnemy3(int ang){
+        ene3s = getWorld().getObjects(Ene3.class);
+        for(int i=0;i<ene3s.size();i++){
+            inene3 = (Ene3)ene3s.get(i);
+            if(inene3.getStoring()){
+                inene3.inmap(4, this, Greenfoot.getRandomNumber(460) + 85, 25, ang);
+                break;
+            }
+        }
+    }
+
+    public void Pausing(boolean pau){
+        pause = pau;
+    }
+}

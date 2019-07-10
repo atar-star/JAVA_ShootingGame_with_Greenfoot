@@ -1,0 +1,50 @@
+import greenfoot.*;
+
+public class map extends Stage2{
+    private static final GreenfootImage bgImage = new GreenfootImage("map3.png");
+    GreenfootImage background = new GreenfootImage(540, 570);
+    private double scrollSpeed = 1.5;
+    private GreenfootImage scrollingImage;
+    private double scrollPosition = 570;
+    GreenfootImage image = new GreenfootImage(540, 570);
+    public map(){
+        InitImage(570);
+    }
+
+    public void act(){
+        painting();
+    }    
+
+    public void InitImage(int scroll){
+        scrollingImage = getScrollingImage(bgImage.getWidth(), bgImage.getHeight());
+        background.drawImage(scrollingImage, 0, scroll);  
+        setImage(background);
+    }
+
+    /*private void paint(int position){
+        background = getImage();
+        background.drawImage(scrollingImage, 0, position);
+        background.drawImage(scrollingImage, 0, position - scrollingImage.getHeight());
+    }*/
+
+    private GreenfootImage getScrollingImage(int width, int height){
+        image.scale(width,height);
+        for(int x = 0; x < width; x += bgImage.getWidth()) {
+            for(int y = 0; y < height; y += bgImage.getHeight()){
+                image.drawImage(bgImage, x, y);
+            }
+        }
+        return image;
+    }
+
+    public void painting(){
+        if(scrollPosition >= bgImage.getHeight()){
+            getWorld().removeObject(this);
+        }
+        scrollPosition += scrollSpeed;
+        background = getImage();
+        background.clear();
+        background.drawImage(scrollingImage, 0, (int)scrollPosition);
+        background.drawImage(scrollingImage, 0, (int)scrollPosition - scrollingImage.getHeight());
+    }
+}

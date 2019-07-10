@@ -1,0 +1,26 @@
+#BlueJ class context
+comment0.params=
+comment0.target=map2()
+comment1.params=
+comment1.target=void\ act()
+comment10.params=ang
+comment10.target=void\ inEnemy3(int)
+comment11.params=pau
+comment11.target=void\ Pausing(boolean)
+comment2.params=scroll
+comment2.target=void\ InitImage(int)
+comment3.params=position
+comment3.target=void\ paint(int)
+comment4.params=width\ height
+comment4.target=greenfoot.GreenfootImage\ getScrollingImage(int,\ int)
+comment5.params=
+comment5.target=void\ painting()
+comment6.params=
+comment6.target=void\ bossDestroy()
+comment7.params=esflag
+comment7.target=void\ enDestroy(boolean)
+comment8.params=
+comment8.target=void\ Clear()
+comment9.params=
+comment9.target=void\ inEnemy2()
+numComments=12
